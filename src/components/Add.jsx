@@ -1,21 +1,28 @@
 
 import {connect} from 'react-redux'
 import {add} from '../actions/index'
+import ListTask from './ListTask'
+import {useRef} from 'react'
 
 const mapStateToProps = state => {
     return {
-        tasks : state.tasks
+        // description : state.description
     }
 }
-const mapDispatchToProps = {add}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        add: desc => dispatch(add(desc)),
+    }
+}
 
-const Add = ({add, tasks}) => {
-    console.log(tasks)
+const Add = ({add}) => {
+    const description = useRef('')
     return(
         <>  
-            {tasks.map(item => <p>{item.description}</p>)}
-            <input type = "text"/>
-            <button onClick = {add} >add</button>
+            <input type = "text" ref = {description}/>
+            <button onClick = {() => add(description.current.value)} >add task</button>
+            <ListTask/>
+            
         </>
     )
 }

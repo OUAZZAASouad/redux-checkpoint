@@ -3,9 +3,7 @@ import rootReducer from '../reducers/index'
 
 const initState = {
     tasks         : [{id : 1, description : 'redux checkpoint',isDone : false }],
-    // newTask          :{id : 2, description : 'API checkpoint',isDone : false },
-    // updated_task  : {},
-    // isDone        : true 
+    // filtredTask   : [{id : 1, description : 'redux checkpoint',isDone : false }],
 }
 
 const store = createStore(rootReducer, initState);

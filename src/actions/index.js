@@ -1,12 +1,33 @@
-import {ADD, EDIT, FILTER} from '../vars/index'
-export function add(){
-    return { type : ADD }
+import {ADD, EDIT, FILTER, DONE, REMOVE} from '../vars/index'
+
+export function add(payload){
+    return { type : ADD,
+             payload
+            }
 }
 
-function filter() {
-    return {type : FILTER}
+export function filter(payload) {
+    return {type  : FILTER,
+            payload
+    }
 }
 
-function edit() {
-    return {type : EDIT}
+export function edit(payload){
+    return { type : EDIT,
+             payload }
+    
 }
+
+export function done(payload){
+    return { type : DONE,
+        payload
+       }
+}
+
+export function remove(payload){
+    return { type : REMOVE,
+        payload
+       }
+}
+
+
