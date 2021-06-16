@@ -1,4 +1,4 @@
-import {ADD, EDIT, FILTER, DONE, REMOVE} from '../vars/index'
+import {ADD, EDIT, FILTER, DONE, REMOVE, LOAD} from '../vars/index'
 
 export function add(payload){
     return { type : ADD,
@@ -28,6 +28,12 @@ export function remove(payload){
     return { type : REMOVE,
         payload
        }
+}
+
+export function load(){
+    return {
+        type : LOAD
+    }
 }
 
 

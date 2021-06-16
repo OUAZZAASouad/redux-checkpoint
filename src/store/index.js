@@ -2,8 +2,8 @@ import {createStore} from 'redux'
 import rootReducer from '../reducers/index'
 
 const initState = {
-    tasks         : [{id : 1, description : 'redux checkpoint',isDone : false }],
-    // filtredTask   : [{id : 1, description : 'redux checkpoint',isDone : false }],
+    tasks         : [{id : 1, description : 'redux checkpoint',isDone : false, toggle : false }],
+    filtredTask   : [],
 }
 
 const store = createStore(rootReducer, initState);

@@ -1,29 +1,38 @@
 
 import {connect} from 'react-redux'
-import {add} from '../actions/index'
+import {add, load} from '../actions/index'
 import ListTask from './ListTask'
-import {useRef} from 'react'
+import {useRef, useEffect} from 'react'
+import './Add.css'
 
 const mapStateToProps = state => {
     return {
-        // description : state.description
+        tasks : state.tasks
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        add: desc => dispatch(add(desc)),
+        add : desc => dispatch(add(desc)),
+        load: ()   => dispatch(load())
     }
 }
 
-const Add = ({add}) => {
+const Add = ({add, tasks, load}) => {
     const description = useRef('')
+    
+    useEffect( () => { 
+        // localStorage.setItem('tasks', JSON.stringify(tasks));
+        load()
+    }, [tasks])
+
     return(
-        <>  
-            <input type = "text" ref = {description}/>
-            <button onClick = {() => add(description.current.value)} >add task</button>
-            <ListTask/>
-            
-        </>
+        <div className = 'content'>  
+            <div>
+                <input type = "text" ref = {description}  />
+                <button className = 'add' onClick = {() => add(description.current.value)} >add task</button>
+            </div>  
+            <ListTask/>     
+        </div>
     )
 }
 

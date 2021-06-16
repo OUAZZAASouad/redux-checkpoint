@@ -3,7 +3,10 @@ import Add from './components/Add'
 
 function App() {
   return (
-    <Add/>
+    <div className = 'container'>
+        <Add/>
+    </div>
+    
   );
 }
 

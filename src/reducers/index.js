@@ -1,4 +1,4 @@
-import {ADD, EDIT, FILTER, DONE, REMOVE} from '../vars/index'
+import {ADD, EDIT, FILTER, DONE, REMOVE, LOAD} from '../vars/index'
 
 function rootReducer(state, action){
     switch (action.type){
@@ -7,15 +7,16 @@ function rootReducer(state, action){
                     tasks : state.tasks.concat({
                     id:Math.round(Math.random()*1000), 
                     description: action.payload,
-                    isDone : false
+                    isDone : false,
+                    toggle : false
                 })})
         case DONE : 
-    
             return Object.assign({}, state, {
                     tasks : state.tasks.map(item => item.id !== action.payload ? item : {
                     id : item.id,
                     description : item.description,
-                    isDone : ! item.isDone
+                    isDone : ! item.isDone,
+                    toggle : false
                 } )
             })
                 
@@ -24,7 +25,8 @@ function rootReducer(state, action){
                 tasks : state.tasks.map(item => item.id !== action.payload.id ? item : {
                 id : item.id,
                 description : action.payload.desc,
-                isDone : item.isDone
+                isDone : item.isDone,
+                toggle : !item.toggle
             } )
         })
 
@@ -33,9 +35,14 @@ function rootReducer(state, action){
                 tasks : state.tasks.filter(item => item.id !== action.payload)
             })
         case FILTER :
-            // window.location.reload()
+            // localStorage stores strings, you need to convert the string to an array
+            // localStorage.setItem('tasks', JSON.stringify(state.tasks))
             return Object.assign({}, state, {
-                tasks : state.tasks.filter(item => item.isDone === action.payload)
+                filtredTask : state.tasks.filter(item => item.isDone === action.payload)
+            })
+        case LOAD :
+            return Object.assign({}, state, {
+                filtredTask : state.tasks
             })
         default :
             return state
